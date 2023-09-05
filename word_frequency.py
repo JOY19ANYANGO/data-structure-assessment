@@ -1,9 +1,11 @@
-def remove_duplicates(sequence):
-    container = []
-    for num in sequence:
-        if num not in container:
-            container.append(num)
+import re
+from collections import Counter
 
-    return container
+def word_frequency(sentence):
+    words = re.findall(r"\b[\w']+\b", sentence.lower()) # use regex to get a list of sentence substrings, including appostrophes
+    word_frequency = Counter(words)  # create a Counter object to auto-count word frequencies from the words list
+    return dict(word_frequency)  # convert the Counter object to a regular dictionary
 
-print(remove_duplicates([2, 3, 2, 4, 5, 3, 6, 7, 5]))  # [2, 3, 4, 5, 6, 7]
+sentence = "This is a test sentence? I'm sure this is a test sentence."
+
+print(word_frequency(sentence))  # {'this': 2, 'is': 2, 'a': 2, 'test': 2, 'sentence': 2, "i'm": 1, 'sure': 1}
